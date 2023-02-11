@@ -3,7 +3,6 @@ import moment from 'moment'
 import Link from 'next/link'
 
 const PostCard = ({ post }) => {
-    console.log(post)
     return (
 
         <div className='flex flex-col lg:flex-row bg-white shadow-lg rounded-lg p-0 lg:p-1 pb-12 lg:pb-0 mb-8'>
