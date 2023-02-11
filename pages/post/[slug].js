@@ -6,6 +6,13 @@ import { getPosts, getPostDetails } from '../../services';
 // import { AdjacentPosts } from '../../sections';
 
 const PostDetails = ({ post }) => {
+
+  const router = useRouter();
+
+  if(router.isFallback) {
+    return <Loader />;
+  }
+
   return (
     <>
       <div className="container mx-auto px-10 mb-8">
@@ -46,6 +53,6 @@ export async function getStaticPaths() {
   const posts = await getPosts();
   return {
     paths: posts.map(({ node: { slug } }) => ({ params: { slug } })),
-    fallback: false,
+    fallback: true,
   };
 }
