@@ -45,13 +45,15 @@ const PostDetail = ({ post }) => {
 
     return (
         <div className='bg-white shadow-lg rounded-lg lg:p-8 pb-12 mb-8'>
-            <div className='relative overflow-hidden shadow-md mb-6'>
-                <img
-                    src={post.featuredImage.url}
-                    alt={post.title}
-                    className='w-full h-full object-top rounded-t-lg'
-                />
-            </div>
+            {
+                post.featuredImage && (<div className='relative overflow-hidden shadow-md mb-6'>
+                    <img
+                        src={post.featuredImage.url}
+                        alt={post.title}
+                        className='w-full h-full object-top rounded-t-lg'
+                    />
+                </div>)
+            }
             <div className='px-4 lg:px-0'>
                 <div className='mb-3 flex flex-col-reverse lg:flex-row  mx-auto items-center justify-around pb-3 border-b'>
                     <h1 className=' items-center text-3xl font-semibold'>
