@@ -6,12 +6,14 @@ const PostCard = ({ post }) => {
     return (
 
         <div className='flex flex-col lg:flex-row bg-white shadow-lg rounded-lg p-0 lg:p-1 pb-12 lg:pb-0 mb-8'>
+            <div>
+                <img
+                    src={post.featuredImage.url}
+                    alt="post.title"
+                    className='object-center h-60 mx-auto pt-2  object-contain rounded-t-lg lg:rounded-lg mb-2'
+                />
+            </div>
 
-            <img
-                src={post.featuredImage.url}
-                alt="post.title"
-                className='object-top h-80 mx-auto pt-2  object-cover shadow-lg rounded-t-lg lg:rounded-lg mb-2'
-            />
             <div className='lg:py-3'>
                 <div className='flex flex-col-reverse justify-center mb-0 lg:mb-0 lg:w-auto mr-0'>
 
