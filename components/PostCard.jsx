@@ -5,14 +5,14 @@ import Link from 'next/link'
 const PostCard = ({ post }) => {
     return (
 
-        <div className='flex flex-col lg:flex-row bg-white shadow-lg rounded-lg p-0 lg:p-1 pb-12 lg:pb-0 mb-8'>
-            <div>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-2 object-center items-center   bg-white shadow-lg rounded-lg p-0 lg:p-1 pb-12 lg:pb-0 mb-8'>
+            {post.featuredImage && (<div>
                 <img
                     src={post.featuredImage.url}
                     alt="post.title"
-                    className='object-center h-60 mx-auto pt-2  object-contain rounded-t-lg lg:rounded-lg mb-2'
+                    className=' h-60 mx-auto pt-2  object-contain rounded-t-lg lg:rounded-lg mb-2'
                 />
-            </div>
+            </div>)}
 
             <div className='lg:py-3'>
                 <div className='flex flex-col-reverse justify-center mb-0 lg:mb-0 lg:w-auto mr-0'>
@@ -44,7 +44,7 @@ const PostCard = ({ post }) => {
                         </div>
                     </div>
                 </div>
-                <p className='text-center text-lg text-gray-700 font-normal px-4 lg:px-20 mb-3'>
+                <p className='text-center text-md text-gray-700 font-normal px-1  mb-3'>
                     {post.excerpt}
                 </p>
                 <div className='text-center'>
@@ -60,6 +60,7 @@ const PostCard = ({ post }) => {
             </div>
 
         </div>
+
 
     )
 }
