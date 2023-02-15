@@ -1,8 +1,10 @@
-import React from 'react'
-import moment from 'moment'
+import React from 'react';
+import Head from 'next/head';
+import moment from 'moment';
+import { useEffect, useRef } from 'react';
+
 
 const PostDetail = ({ post }) => {
-
     const getContentFragment = (index, text, obj, type) => {
         let modifiedText = text;
 
@@ -22,11 +24,29 @@ const PostDetail = ({ post }) => {
 
         switch (type) {
             case 'heading-three':
-                return <h3 key={index} className="text-xl font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h3>;
+                return (
+                    <h3 key={index} className="text-xl font-semibold mb-4">
+                        {modifiedText.map((item, i) => (
+                            <React.Fragment key={i}>{item}</React.Fragment>
+                        ))}
+                    </h3>
+                );
             case 'paragraph':
-                return <p key={index} className="mb-8">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</p>;
+                return (
+                    <p key={index} className="mb-8">
+                        {modifiedText.map((item, i) => (
+                            <React.Fragment key={i}>{item}</React.Fragment>
+                        ))}
+                    </p>
+                );
             case 'heading-four':
-                return <h4 key={index} className="text-md font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h4>;
+                return (
+                    <h4 key={index} className="text-md font-semibold mb-4">
+                        {modifiedText.map((item, i) => (
+                            <React.Fragment key={i}>{item}</React.Fragment>
+                        ))}
+                    </h4>
+                );
             case 'image':
                 return (
                     <img
@@ -37,14 +57,64 @@ const PostDetail = ({ post }) => {
                         src={obj.src}
                     />
                 );
+            case "code-block":
+                const codeRef = useRef(null);
+                useEffect(() => {
+                    hljs.highlightElement(codeRef.current);
+                }, []);
+
+                const copyToClipboard = () => {
+                    const textToCopy = codeRef.current.textContent;
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        alert('Copied to clipboard');
+                    }, () => {
+                        alert('Unable to copy to clipboard');
+                    });
+                };
+                return (
+                    <>
+                        <Head>
+                            <link
+                                rel="stylesheet"
+                                href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/an-old-hope.min.css"
+                            />
+                            <script
+                                src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"
+                            ></script>
+                        </Head>
+                        <div >
+                            <button onClick={copyToClipboard} className="m-2">
+                                <span className='grid grid-cols-2 bg-blue-400 text-white px-3 py-2  rounded-lg'>
+                                    <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                        <path xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" d="M12 4C12.5523 4 13 4.44772 13 5V16.5858L17.2929 12.2929C17.6834 11.9024 18.3166 11.9024 18.7071 12.2929C19.0976 12.6834 19.0976 13.3166 18.7071 13.7071L12.7071 19.7071C12.3166 20.0976 11.6834 20.0976 11.2929 19.7071L5.29289 13.7071C4.90237 13.3166 4.90237 12.6834 5.29289 12.2929C5.68342 11.9024 6.31658 11.9024 6.70711 12.2929L11 16.5858V5C11 4.44772 11.4477 4 12 4Z" fill="#282828"></path>
+                                    </svg>
+                                    copy
+                                </span>
+                            </button>
+
+                            <pre key={index}>
+                                <code ref={codeRef} >
+                                    {modifiedText.map((item, i) => (
+                                        <React.Fragment key={i}>{item}</React.Fragment>
+                                    ))}
+                                </code>
+                            </pre>
+                        </div>
+                    </>
+
+                );
             default:
                 return modifiedText;
         }
     };
 
+    // Rest of the component code
+
+
+
 
     return (
-        <div className='bg-white shadow-lg rounded-lg lg:p-8 pb-12 mb-8'>
+        <div className='bg-white shadow-lg rounded-lg  lg:p-8 pb-12 mb-8'>
             {
                 post.featuredImage && (<div className='relative overflow-hidden shadow-md mb-6'>
                     <img
@@ -80,8 +150,8 @@ const PostDetail = ({ post }) => {
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
 
                 {post.content.raw.children.map((typeObj, index) => {
                     const children = typeObj.children.map((item, itemindex) => getContentFragment(itemindex, item.text, item));
