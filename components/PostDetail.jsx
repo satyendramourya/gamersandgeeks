@@ -2,6 +2,8 @@ import React from 'react';
 import Head from 'next/head';
 import moment from 'moment';
 import { useEffect, useRef } from 'react';
+import hljs from 'highlight.js';
+
 
 
 const PostDetail = ({ post }) => {
@@ -78,9 +80,7 @@ const PostDetail = ({ post }) => {
                                 rel="stylesheet"
                                 href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/an-old-hope.min.css"
                             />
-                            <script
-                                src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"
-                            ></script>
+
                         </Head>
                         <div >
                             <button onClick={copyToClipboard} className="m-2">
