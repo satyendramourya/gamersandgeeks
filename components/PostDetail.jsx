@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import moment from 'moment';
 import { useEffect, useRef } from 'react';
@@ -7,6 +7,9 @@ import hljs from 'highlight.js';
 
 
 const PostDetail = ({ post }) => {
+    const [copied, setCopied] = useState(false);
+    const [activeButoon, setActiveButton] = useState(false);
+
     const getContentFragment = (index, text, obj, type) => {
         let modifiedText = text;
 
@@ -68,39 +71,37 @@ const PostDetail = ({ post }) => {
                 const copyToClipboard = () => {
                     const textToCopy = codeRef.current.textContent;
                     navigator.clipboard.writeText(textToCopy).then(() => {
-                        alert('Copied to clipboard');
-                    }, () => {
-                        alert('Unable to copy to clipboard');
-                    });
+                        setCopied(true);
+
+                        setTimeout(() => {
+                            setCopied(false);
+                        }, 2000);
+                        // alert('Copied to clipboard');
+                    })
                 };
                 return (
-                    <>
-                        <Head>
-                            <link
-                                rel="stylesheet"
-                                href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/an-old-hope.min.css"
-                            />
+                    <div >
 
-                        </Head>
-                        <div >
-                            <button onClick={copyToClipboard} className="m-2">
-                                <span className='grid grid-cols-2 bg-blue-400 text-white px-3 py-2  rounded-lg'>
-                                    <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                        <path xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" d="M12 4C12.5523 4 13 4.44772 13 5V16.5858L17.2929 12.2929C17.6834 11.9024 18.3166 11.9024 18.7071 12.2929C19.0976 12.6834 19.0976 13.3166 18.7071 13.7071L12.7071 19.7071C12.3166 20.0976 11.6834 20.0976 11.2929 19.7071L5.29289 13.7071C4.90237 13.3166 4.90237 12.6834 5.29289 12.2929C5.68342 11.9024 6.31658 11.9024 6.70711 12.2929L11 16.5858V5C11 4.44772 11.4477 4 12 4Z" fill="#282828"></path>
-                                    </svg>
-                                    copy
-                                </span>
-                            </button>
+                        <button key={index} name={index} onClick={copyToClipboard} className="m-2" >
+                            <span className={`bg-blue-400 text-white px-3 py-2 rounded-lg flex items-center justify-center ${copied ? 'animate-pulse' : ''}`}>
+                                <svg fill='white' className={!copied ? 'block' : 'hidden'} xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 512 512">
+                                    <path d="M224 0c-35.3 0-64 28.7-64 64V288c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H224zM64 160c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H288c35.3 0 64-28.7 64-64V384H288v64H64V224h64V160H64z" />
+                                </svg>
+                                <svg fill='white' className={copied ? 'block' : 'hidden'} xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 512 512">
+                                    <path d="M243.8 339.8C232.9 350.7 215.1 350.7 204.2 339.8L140.2 275.8C129.3 264.9 129.3 247.1 140.2 236.2C151.1 225.3 168.9 225.3 179.8 236.2L224 280.4L332.2 172.2C343.1 161.3 360.9 161.3 371.8 172.2C382.7 183.1 382.7 200.9 371.8 211.8L243.8 339.8zM512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 48C141.1 48 48 141.1 48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48z" />
+                                </svg>
+                            </span>
+                        </button>
 
-                            <pre key={index}>
-                                <code ref={codeRef} >
-                                    {modifiedText.map((item, i) => (
-                                        <React.Fragment key={i}>{item}</React.Fragment>
-                                    ))}
-                                </code>
-                            </pre>
-                        </div>
-                    </>
+                        <pre key={index} >
+                            <code ref={codeRef} >
+                                {modifiedText.map((item, i) => (
+                                    <React.Fragment key={i}>{item}</React.Fragment>
+                                ))}
+                            </code>
+                        </pre>
+                    </div>
+
 
                 );
             default:
@@ -115,6 +116,12 @@ const PostDetail = ({ post }) => {
 
     return (
         <div className='bg-white shadow-lg rounded-lg  lg:p-8 pb-12 mb-8'>
+            <Head>
+                <link
+                    rel="stylesheet"
+                    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/an-old-hope.min.css"
+                />
+            </Head>
             {
                 post.featuredImage && (<div className='relative overflow-hidden shadow-md mb-6'>
                     <img
