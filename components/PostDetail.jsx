@@ -8,7 +8,18 @@ import hljs from 'highlight.js';
 
 const PostDetail = ({ post }) => {
     const [copied, setCopied] = useState(false);
-    const [activeButoon, setActiveButton] = useState(false);
+    const [btnIndex, setBtnIndex] = useState(0);
+
+    const copyContText = (textToCopy) => {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            setCopied(true);
+
+            setTimeout(() => {
+                setCopied(false);
+            }, 2000);
+        })
+    };
+
 
     const getContentFragment = (index, text, obj, type) => {
         let modifiedText = text;
@@ -69,27 +80,22 @@ const PostDetail = ({ post }) => {
                 }, []);
 
                 const copyToClipboard = () => {
-                    const textToCopy = codeRef.current.textContent;
-                    navigator.clipboard.writeText(textToCopy).then(() => {
-                        setCopied(true);
-
-                        setTimeout(() => {
-                            setCopied(false);
-                        }, 2000);
-                        // alert('Copied to clipboard');
-                    })
+                    const text = codeRef.current.innerText;
+                    copyContText(text);
+                    setBtnIndex(index);
                 };
+
+
                 return (
                     <div >
 
-                        <button key={index} name={index} onClick={copyToClipboard} className="m-2" >
-                            <span className={`bg-blue-400 text-white px-3 py-2 rounded-lg flex items-center justify-center ${copied ? 'animate-pulse' : ''}`}>
-                                <svg fill='white' className={!copied ? 'block' : 'hidden'} xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 512 512">
-                                    <path d="M224 0c-35.3 0-64 28.7-64 64V288c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H224zM64 160c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H288c35.3 0 64-28.7 64-64V384H288v64H64V224h64V160H64z" />
+                        <button key={index} onClick={copyToClipboard} className="m-2" >
+                            <span className={` text-white px-3 py-2 rounded-lg flex items-center justify-center ${index === btnIndex && copied ? 'animate-pulse bg-green-400' : 'bg-blue-400'}`}>
+
+                                <svg fill='white' xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 512 512">
+                                    <path d={index === btnIndex && copied ? "M243.8 339.8C232.9 350.7 215.1 350.7 204.2 339.8L140.2 275.8C129.3 264.9 129.3 247.1 140.2 236.2C151.1 225.3 168.9 225.3 179.8 236.2L224 280.4L332.2 172.2C343.1 161.3 360.9 161.3 371.8 172.2C382.7 183.1 382.7 200.9 371.8 211.8L243.8 339.8zM512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 48C141.1 48 48 141.1 48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48z" : "M224 0c-35.3 0-64 28.7-64 64V288c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H224zM64 160c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H288c35.3 0 64-28.7 64-64V384H288v64H64V224h64V160H64z"} />
                                 </svg>
-                                <svg fill='white' className={copied ? 'block' : 'hidden'} xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 512 512">
-                                    <path d="M243.8 339.8C232.9 350.7 215.1 350.7 204.2 339.8L140.2 275.8C129.3 264.9 129.3 247.1 140.2 236.2C151.1 225.3 168.9 225.3 179.8 236.2L224 280.4L332.2 172.2C343.1 161.3 360.9 161.3 371.8 172.2C382.7 183.1 382.7 200.9 371.8 211.8L243.8 339.8zM512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 48C141.1 48 48 141.1 48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48z" />
-                                </svg>
+
                             </span>
                         </button>
 
@@ -100,6 +106,7 @@ const PostDetail = ({ post }) => {
                                 ))}
                             </code>
                         </pre>
+                        <hr />
                     </div>
 
 
