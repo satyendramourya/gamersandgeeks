@@ -1,13 +1,13 @@
-import React from 'react'
-import { useRouter } from 'next/router';
-import { Categories, PostWidget, PostCard, Loader } from '../../components';
-import { getCategories, getCategoryPost, } from '../../services';
+import React from "react";
+import { useRouter } from "next/router";
+import { Categories, PostWidget, PostCard, Loader } from "../../components";
+import { getCategories, getCategoryPost } from "../../services";
 
 const categoriesPost = ({ posts }) => {
   console.log(posts);
   const router = useRouter();
 
-  if(router.isFallback) {
+  if (router.isFallback) {
     return <Loader />;
   }
   return (
@@ -25,8 +25,8 @@ const categoriesPost = ({ posts }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default categoriesPost;
 
@@ -37,6 +37,8 @@ export async function getStaticProps({ params }) {
     props: {
       posts: data,
     },
+    // Revalidate the page every 10 seconds to update the data
+    revalidate: 10,
   };
 }
 
