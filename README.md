@@ -1,27 +1,32 @@
-# Next.js + Tailwind CSS Example
+# Gericht Restaurant Website
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+![Gericht Restaurant Website Screenshot](screenshot.png)
 
-## Deploy your own
+Welcome to Gericht, a family-owned restaurant that has been serving delicious meals since 2007. Our chefs use only the freshest ingredients to create classic dishes and unique twists on old favorites. We offer a warm and welcoming atmosphere, friendly service, and a menu that caters to all tastes and dietary needs.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+## Features
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+- Menu with options for all tastes and dietary needs
+- Warm and welcoming atmosphere
+- Friendly service
+- Classic dishes and unique twists on old favorites
+- Family-owned and operated since 2007
 
-## How to use
+## Technologies Used
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+- React
+- CSS
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-```
+## Getting Started
 
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
+1. Clone the repository.
+2. Install dependencies with `npm install`.
+3. Run the application with `npm start`.
 
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
+## Contributing
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+If you find any issues or have suggestions for improvements, feel free to submit a pull request or open an issue.
+
+## License
+
+This project is licensed under the MIT License.
