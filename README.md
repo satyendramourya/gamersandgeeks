@@ -1,5 +1,5 @@
 # GAG Blog Website
-
+![GAG Blog Website Screenshot](./public/Screenshot.png)
 This is a blog website built using Next.js and Tailwind CSS for the frontend and GraphCMS for the backend using GraphQL. The website allows the admin to perform CRUD operations on the blog posts in real-time.
 
 ## Technologies Used
@@ -87,3 +87,6 @@ Note: Make sure to install these dependencies and dev dependencies before runnin
 ## Conclusion
 
 With these instructions, you can now run and develop the GAG blog website using Next.js, Tailwind CSS, and GraphCMS. Happy coding!
+  
+  # Check the live 
+  <a href="https://www.gamersandgeeks.works/">Here.</a>
