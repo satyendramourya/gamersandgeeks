@@ -24,10 +24,5 @@ Welcome to Gericht, a family-owned restaurant that has been serving delicious me
 2. Install dependencies with `npm install`.
 3. Run the application with `npm start`.
 
-## Contributing
-
-If you find any issues or have suggestions for improvements, feel free to submit a pull request or open an issue.
-
-## License
-
-This project is licensed under the MIT License.
+## Check Live Project
+<a href="https://gericht-restaurant-ecru.vercel.app/"> Here. </a> 
